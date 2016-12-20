@@ -1,0 +1,26 @@
+{
+    "assets": {
+        "battle_tileset": {"type": "image", "source": "assets/images/open_tileset.png"},
+        "knight_image": {"type": "image", "source": "assets/images/knight.png"},
+        "princess_image": {"type": "image", "source": "assets/images/princess.png"},
+        "mage_image": {"type": "image", "source": "assets/images/mage.png"},
+        "archer_image": {"type": "image", "source": "assets/images/archer.png"},
+        "rectangle_image": {"type": "image", "source": "assets/images/rectangle.png"},
+        "healthbar_image": {"type": "image", "source": "assets/images/healthbar.png"},
+        "highlighted_region_image": {"type": "image", "source": "assets/images/highlighted_region.png"},
+        "player2_highlighted_region_image": {"type": "image", "source": "assets/images/player2_highlighted_region.png"},
+        
+        "level_tilemap": {"type": "tilemap", "source": "assets/maps/preparation_map.json"}
+    },
+    "groups": [
+        "place_regions",
+        "unit_sprites"
+    ],
+    "map": {
+        "key": "level_tilemap",
+        "tilesets": ["battle_tileset"]
+    },
+    "prefabs": {
+
+    }
+}

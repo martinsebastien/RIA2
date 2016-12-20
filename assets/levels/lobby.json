@@ -1,0 +1,22 @@
+{
+    "assets": {
+    },
+    "groups": [
+        "hud"        
+    ],
+    "prefabs": {
+        "waiting_message": {
+            "type": "text",
+            "position": {"x": 0.5, "y": 0.5},
+            "properties": {
+                "text": "Waiting for players to join",
+                "style": {
+                    "font": "20px Arial", 
+                    "fill": "#FFF"
+                },
+                "group": "hud",
+                "anchor": {"x": 0.5, "y": 0.5}
+            }
+        }
+    }
+}

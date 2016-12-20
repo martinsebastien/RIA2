@@ -1,0 +1,34 @@
+{
+    "knight": {
+        "health": 12,
+        "attack": 8,
+        "defense": 3,
+        "speed": 2,
+        "walking_radius": 3,
+        "attack_range": 1
+    },
+    "archer": {
+        "health": 5,
+        "attack": 5,
+        "defense": 1,
+        "speed": 3,
+        "walking_radius": 5,
+        "attack_range": 5
+    },
+    "princess": {
+        "health": 8,
+        "attack": 12,
+        "defense": 2,
+        "speed": 2,
+        "walking_radius": 4,
+        "attack_range": 1
+    },
+    "mage": {
+        "health": 5,
+        "attack": 10,
+        "defense": 1,
+        "speed": 1,
+        "walking_radius": 3,
+        "attack_range": 3
+    }
+}

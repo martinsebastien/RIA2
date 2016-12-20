@@ -1,0 +1,31 @@
+{
+  "name": "magic-legions-tactics",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Sébastien Martin <sebmartinus@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack",
+    "deploy": "webpack --config webpack.production.config.js",
+    "test": "standard"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.2",
+    "browser-sync-webpack-plugin": "^1.1.3",
+    "expose-loader": "^0.7.1",
+    "standard": "^8.6.0",
+    "webfontloader": "^1.6.27",
+    "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "easystarjs": "^0.3.1",
+    "firebase": "^3.6.4",
+    "phaser-ce": "^2.7.1",
+    "priorityqueuejs": "^1.0.0"
+  }
+}

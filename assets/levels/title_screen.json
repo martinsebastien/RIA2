@@ -1,0 +1,37 @@
+{
+    "assets": {
+    },
+    "groups": [
+        "text"
+    ],
+    "prefabs": {
+        "title": {
+            "type": "text",
+            "position": {"x": 0.5, "y": 0.3},
+            "properties": {
+                "text": "MAGIC : LEGIONS TACTICS",
+                "style": {
+                    "font": "36px Arial", 
+                    "fill": "#FFF",
+                    "font-weight": "bold"
+                },
+                "group": "text",
+                "anchor": {"x": 0.5, "y": 0.5}
+            }
+        },
+        "start_game_message": {
+            "type": "text",
+            "position": {"x": 0.5, "y": 0.7},
+            "properties": {
+                "text": "START",
+                "style": {
+                    "font": "18px Arial", 
+                    "fill": "#FFF",
+                    "font-weight": "bold"
+                },
+                "group": "text",
+                "anchor": {"x": 0.5, "y": 0.5}
+            }
+        }
+    }
+}
