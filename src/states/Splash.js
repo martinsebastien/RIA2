@@ -17,7 +17,7 @@ export default class extends Phaser.State {
   }
 
   create () {
-    this.state.start('Game')
+      this.game.state.start('Boot', true, false, 'assets/levels/lobby.json', 'LobbyState');
   }
 
 }

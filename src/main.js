@@ -25,7 +25,7 @@ class Game extends Phaser.Game {
     this.state.add('Preparation', PreparationState, false);      // Is the preparation of the battle state
     this.state.add('Battle', BattleState, false);                // Is the battle state
 
-    this.state.start('Boot');                                    // Run the Boot state
+    this.state.start('Boot', true, false, 'assets/levels/title_screen.json', 'TitleState');                                    // Run the Boot state
   }
 }
 
