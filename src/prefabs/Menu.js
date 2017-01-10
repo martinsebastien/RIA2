@@ -1,28 +1,26 @@
-var Tactics = Tactics || {};
+import Phaser from 'phaser'
 
-Tactics.Menu = function (game_state, name, position, properties) {
-    "use strict";
-    var live_index, life;
-    Tactics.Prefab.call(this, game_state, name, position, properties);
+class Menu extends Prefab {
 
-    this.anchor.setTo(0);
-    this.menu_items = [];
-    this.show(false);
-};
+    constructor(game_state, name, position, properties) {
+        let live_index, life;
 
-Tactics.Menu.prototype = Object.create(Tactics.Prefab.prototype);
-Tactics.Menu.prototype.constructor = Tactics.Menu;
+        super(game_state, name, position, properties);
 
-Tactics.Menu.prototype.add_item = function (item) {
-    "use strict";
-    this.menu_items.push(item);
-    item.visible = this.visible;
-};
+        this.anchor.setTo(0);
+        this.menu_items = [];
+        this.show(false);
+    }
 
-Tactics.Menu.prototype.show = function (show) {
-    "use strict";
-    this.visible = show;
-    this.menu_items.forEach(function (menu_item) {
-        menu_item.visible = show;
-    }, this);
-};
+    add_item(item) {
+        this.menu_items.push(item);
+        item.visible = this.visible;
+    }
+
+    show(show) {
+        this.visible = show;
+        this.menu_items.forEach(function (menu_item) {
+            menu_item.visible = show;
+        }, this);
+    }
+}

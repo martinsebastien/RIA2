@@ -1,18 +1,15 @@
-var Tactics = Tactics || {};
+import Phaser from 'phaser'
 
-Tactics.HighlightedRegion = function (game_state, name, position, properties) {
-    "use strict";
-    Tactics.Prefab.call(this, game_state, name, position, properties);
+class HighlightedRegion extends Prefab {
 
-    this.alpha = 0.5;
-    this.inputEnabled = true;
-    this.events.onInputDown.add(this.select, this);
-};
+    constructor(game_state, name, position, properties) {
+        super(game_state, name, position, properties);
 
-Tactics.HighlightedRegion.prototype = Object.create(Tactics.Prefab.prototype);
-Tactics.HighlightedRegion.prototype.constructor = Tactics.HighlightedRegion;
+        this.alpha = 0.5;
+        this.inputEnabled = true;
+        this.events.onInputDown.add(this.select, this);
+    }
 
-Tactics.HighlightedRegion.prototype.select = function () {
-    "use strict";
-
-};
+    select() {
+    }
+}

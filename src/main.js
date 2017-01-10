@@ -30,6 +30,7 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
+var firebase = new Firebase("https://tactics-a6625.firebaseio.com/");
 
 // const firebase = new Firebase("https://tactics-a6625.firebaseio.com/")
 

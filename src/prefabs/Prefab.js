@@ -1,19 +1,19 @@
-var Tactics = Tactics || {};
+import Phaser from 'phaser'
 
-Tactics.Prefab = function (game_state, name, position, properties) {
-    "use strict";
-    Phaser.Sprite.call(this, game_state.game, position.x, position.y, properties.texture);
+class TextPrefab extends Phaser.Sprite {
 
-    this.game_state = game_state;
+    constructor(game_state, name, position, properties) {
+        super(game_state.game, position.x, position.y, properties.texture);
 
-    this.name = name;
 
-    this.game_state.groups[properties.group].add(this);
-    this.frame = +properties.frame;
-    this.anchor.setTo(0.5);
+        this.game_state = game_state;
 
-    this.game_state.prefabs[name] = this;
-};
+        this.name = name;
 
-Tactics.Prefab.prototype = Object.create(Phaser.Sprite.prototype);
-Tactics.Prefab.prototype.constructor = Tactics.Prefab;
+        this.game_state.groups[properties.group].add(this);
+        this.frame = +properties.frame;
+        this.anchor.setTo(0.5);
+
+        this.game_state.prefabs[name] = this;
+    }
+}

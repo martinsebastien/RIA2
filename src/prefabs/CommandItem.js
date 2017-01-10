@@ -1,17 +1,14 @@
-var Tactics = Tactics || {};
+import Phaser from 'phaser'
 
-Tactics.CommandItem = function (game_state, name, position, properties) {
-    "use strict";
-    Tactics.MenuItem.call(this, game_state, name, position, properties);
+class CommandItem extends MenuItem {
 
-    this.callback = properties.callback;
-};
+    constructor(game_state, name, position, properties) {
+        super(game_state, name, position, properties);
 
-Tactics.CommandItem.prototype = Object.create(Tactics.MenuItem.prototype);
-Tactics.CommandItem.prototype.constructor = Tactics.CommandItem;
+        this.callback = properties.callback;
+    }
 
-Tactics.CommandItem.prototype.select = function () {
-    "use strict";
-    //this.game_state.prefabs.menu.show(false);
-    this.game_state[this.callback].call(this.game_state);
-};
+    select() {
+        this.game_state[this.callback].call(this.game_state);
+    }
+}
