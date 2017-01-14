@@ -1,19 +1,22 @@
 import Phaser from 'phaser'
+import JSONLevelState from './JSONLevelState'
+import TextPrefab from '../prefabs/TextPrefab'
 
-export default class extends Phaser.State {
-  constructor () {
-    super();
-      this.prefab_classes = {
-          "text": Tactics.TextPrefab
-      };
-  }
+export default class extends JSONLevelState {
+    constructor() {
+        super();
 
-  create () {
-      Tactics.JSONLevelState.create.call(this);
-      this.game.input.onDown.add(this.start_battle, this);
-  }
+        this.prefab_classes = {
+            "text": TextPrefab
+        };
+    }
 
-    start_battle () {
+    create() {
+        super.create();
+        this.game.input.onDown.add(this.start_battle, this);
+    }
+
+    start_battle() {
         this.game.state.start("BootState", true, false, "assets/levels/lobby.json", "LobbyState");
     }
 

@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import MenuItem from '../prefabs/MenuItem'
 
 class CommandItem extends MenuItem {
 

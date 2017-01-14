@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-class TextPrefab extends Phaser.Sprite {
+export default class TextPrefab extends Phaser.Sprite {
 
     constructor(game_state, name, position, properties) {
         super(game_state.game, position.x, position.y, properties.texture);

@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import WebFont from 'webfontloader'
+import Tiled from './Tiled'
 
 export default class extends Tiled {
 

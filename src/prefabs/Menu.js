@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
+import Prefab from '../prefabs/Prefab'
 
-class Menu extends Prefab {
+export default class Menu extends Prefab {
 
     constructor(game_state, name, position, properties) {
         let live_index, life;

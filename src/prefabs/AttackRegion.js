@@ -1,6 +1,8 @@
 import Phaser from 'phaser'
+import HighlightedRegion from '../prefabs/HighlightedRegion'
 
-class AttackRegion extends HighlightedRegion {
+
+export default class AttackRegion extends HighlightedRegion {
 
     constructor(game_state, name, position, properties) {
         super(game_state, name, position, properties);

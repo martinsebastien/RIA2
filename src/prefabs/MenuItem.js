@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
+import TextPrefab from '../prefabs/TextPrefab'
 
-class MenuItem extends TextPrefab {
+export default class MenuItem extends TextPrefab {
 
     constructor(game_state, name, position, properties) {
         super(game_state, name, position, properties);

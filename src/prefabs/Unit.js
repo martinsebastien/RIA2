@@ -1,6 +1,8 @@
 import Phaser from 'phaser'
+import Prefab from '../prefabs/Prefab'
 
-class Unit extends Prefab {
+
+export default class Unit extends Prefab {
 
     constructor(game_state, name, position, properties) {
         super(game_state, name, position, properties);
