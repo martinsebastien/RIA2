@@ -14,14 +14,8 @@ export default class extends Phaser.State {
     }
 
     preload() {
-        this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg');
-        this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar');
-        centerGameObjects([this.loaderBg, this.loaderBar]);
-
-        this.load.setPreloadSprite(this.loaderBar);
-
-        const assets = this.level_data.assets;
-        let asset_loader, asset_key, asset;
+        let assets, asset_loader, asset_key, asset;
+        assets = this.level_data.assets;
         for (asset_key in assets) { // load assets according to asset key
             if (assets.hasOwnProperty(asset_key)) {
                 asset = assets[asset_key];

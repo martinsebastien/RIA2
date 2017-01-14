@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "easystarjs": "^0.3.1",
-    "firebase": "^3.6.4",
+    "firebase": "^3.6.5",
     "phaser-ce": "^2.7.1",
     "priorityqueuejs": "^1.0.0"
   }

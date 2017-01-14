@@ -1,7 +1,7 @@
 import 'pixi'
 import 'p2'
 import Phaser from 'phaser'
-import * as Firebase from 'firebase'
+import Bdd from './prefabs/Bdd'
 
 import BootState from './states/Boot'
 import SplashState from './states/Splash'
@@ -9,6 +9,17 @@ import TitleState from './states/Title'
 import LobbyState from './states/Lobby'
 import PreparationState from './states/Preparation'
 import BattleState from './states/Battle'
+
+// Initialize Firebase
+const config = {
+    apiKey: "AIzaSyB-tA4khTEpuS0PR71OlpBQBY4Dun-mPyk",
+    authDomain: "magic-legions.firebaseapp.com",
+    databaseURL: "https://magic-legions.firebaseio.com",
+    storageBucket: "magic-legions.appspot.com",
+    messagingSenderId: "43320763068"
+};
+
+window.bdd = new Bdd(config);
 
 class Game extends Phaser.Game {
 
@@ -30,14 +41,4 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyB-tA4khTEpuS0PR71OlpBQBY4Dun-mPyk",
-    authDomain: "magic-legions.firebaseapp.com",
-    databaseURL: "https://magic-legions.firebaseio.com",
-    storageBucket: "magic-legions.appspot.com",
-    messagingSenderId: "43320763068"
-};
-Firebase.initializeApp(config);
-
+console.log(window.game);

@@ -17,7 +17,7 @@ export default class extends JSONLevelState {
     }
 
     start_battle() {
-        this.game.state.start("BootState", true, false, "assets/levels/lobby.json", "LobbyState");
+        this.game.state.start("Boot", true, false, "assets/levels/lobby.json", "Lobby");
     }
 
 }
