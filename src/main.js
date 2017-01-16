@@ -19,15 +19,16 @@ const config = {
     messagingSenderId: "43320763068"
 };
 
-window.bdd = new Bdd(config);
-
 class Game extends Phaser.Game {
 
     constructor() {
-        let width = document.documentElement.clientWidth > 600 ? 600 : document.documentElement.clientWidth;
-        let height = document.documentElement.clientHeight > 600 ? 600 : document.documentElement.clientHeight;
+        //let width = document.documentElement.clientWidth > 600 ? 600 : document.documentElement.clientWidth;
+        //let height = document.documentElement.clientHeight > 600 ? 600 : document.documentElement.clientHeight;
 
-        super(width, height, Phaser.AUTO, 'content', null, false, false);
+        let GAME_WIDTH = 1024;
+        let GAME_HEIGHT = 640;
+
+        super(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'content', null, false, false);
 
         this.state.add('Boot', BootState, false);                    // Boot the game (load the loading state)
         this.state.add('Splash', SplashState, false);                // Is the loading state
@@ -40,5 +41,8 @@ class Game extends Phaser.Game {
     }
 }
 
-window.game = new Game();
-console.log(window.game);
+// Mettre le code ci-dessous dans le device ready de cordova au lieu du window.onload
+window.onload = function () {
+    window.bdd = new Bdd(config);
+    window.game = new Game();
+};

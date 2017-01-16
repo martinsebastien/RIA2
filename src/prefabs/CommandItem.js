@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import MenuItem from '../prefabs/MenuItem'
 
-class CommandItem extends MenuItem {
+export default class CommandItem extends MenuItem {
 
     constructor(game_state, name, position, properties) {
         super(game_state, name, position, properties);

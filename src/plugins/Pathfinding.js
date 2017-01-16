@@ -1,76 +1,70 @@
-var Tactics = Tactics || {};
+import Phaser from 'phaser'
+import EasyStar from 'easystarjs'
 
-Tactics.Pathfinding = function (game, parent) {
-    "use strict";
-    Phaser.Plugin.call(this, game, parent);
-    this.easy_star = new EasyStar.js();
-};
+export default class Pathfinding extends Phaser.Plugin {
 
-Tactics.Pathfinding.prototype = Object.create(Phaser.Plugin.prototype);
-Tactics.Pathfinding.prototype.constructor = Tactics.Pathfinding;
+    constructor(game, parent) {
+        super(game, parent);
 
-Tactics.Pathfinding.prototype.init = function (world_grid, acceptable_tiles, tile_dimensions) {
-    "use strict";
-    var grid_row, grid_column, grid_indices;
-    this.grid_dimensions = {row: world_grid.length, column: world_grid[0].length};
-    this.world_grid = world_grid;
-
-    this.easy_star.setGrid(this.world_grid);
-    this.easy_star.setAcceptableTiles(acceptable_tiles);    
-
-    this.tile_dimensions = tile_dimensions;
-};
-
-Tactics.Pathfinding.prototype.find_path = function (origin, target, callback, context) {
-    "use strict";
-    var origin_coord, target_coord;
-    origin_coord = this.get_coord_from_point(origin);
-    target_coord = this.get_coord_from_point(target);
-    
-    if (!this.outside_grid(origin_coord) && !this.outside_grid(target_coord)) {
-        this.easy_star.findPath(origin_coord.column, origin_coord.row, target_coord.column, target_coord.row, this.call_callback_function.bind(this, callback, context));
-        this.easy_star.calculate();
-        return true;
-    } else {
-        return false;
+        this.easy_star = new EasyStar.js();
     }
-};
 
-Tactics.Pathfinding.prototype.call_callback_function = function (callback, context, path) {
-    "use strict";
-    var path_positions;
-    path_positions = [];
-    if (path) {
-        path.forEach(function (path_coord) {
-            path_positions.push(this.get_point_from_coord({row: path_coord.y, column: path_coord.x}));
-        }, this);
-        callback.call(context, path_positions);
+    init(world_grid, acceptable_tiles, tile_dimensions) {
+        let grid_row, grid_column, grid_indices;
+        this.grid_dimensions = { row: world_grid.length, column: world_grid[0].length };
+        this.world_grid = world_grid;
+
+        this.easy_star.setGrid(this.world_grid);
+        this.easy_star.setAcceptableTiles(acceptable_tiles);
+
+        this.tile_dimensions = tile_dimensions;
     }
-};
 
-Tactics.Pathfinding.prototype.outside_grid = function (coord) {
-    "use strict";
-    return coord.row < 0 || coord.row > this.grid_dimensions.row - 1 || coord.column < 0 || coord.column > this.grid_dimensions.column - 1;
-};
+    find_path(origin, target, callback, context) {
+        let origin_coord, target_coord;
+        origin_coord = this.get_coord_from_point(origin);
+        target_coord = this.get_coord_from_point(target);
 
-Tactics.Pathfinding.prototype.remove_tile = function (coord) {
-    "use strict";
-    this.world_grid[coord.row][coord.column] = -1;
-    this.easy_star.setGrid(this.world_grid);
-};
+        if (!this.outside_grid(origin_coord) && !this.outside_grid(target_coord)) {
+            this.easy_star.findPath(origin_coord.column, origin_coord.row, target_coord.column, target_coord.row, this.call_callback_function.bind(this, callback, context));
+            this.easy_star.calculate();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-Tactics.Pathfinding.prototype.get_coord_from_point = function (point) {
-    "use strict";
-    var row, column;
-    row = Math.floor(point.y / this.tile_dimensions.y);
-    column = Math.floor(point.x / this.tile_dimensions.x);
-    return {row: row, column: column};
-};
+    call_callback_function(callback, context, path) {
+        let path_positions;
+        path_positions = [];
+        if (path) {
+            path.forEach(function (path_coord) {
+                path_positions.push(this.get_point_from_coord({ row: path_coord.y, column: path_coord.x }));
+            }, this);
+            callback.call(context, path_positions);
+        }
+    }
 
-Tactics.Pathfinding.prototype.get_point_from_coord = function (coord) {
-    "use strict";
-    var x, y;
-    x = (coord.column * this.tile_dimensions.x) + (this.tile_dimensions.x / 2);
-    y = (coord.row * this.tile_dimensions.y) + (this.tile_dimensions.y / 2);
-    return new Phaser.Point(x, y);
-};
+    outside_grid(coord) {
+        return coord.row < 0 || coord.row > this.grid_dimensions.row - 1 || coord.column < 0 || coord.column > this.grid_dimensions.column - 1;
+    }
+
+    remove_tile(coord) {
+        this.world_grid[coord.row][coord.column] = -1;
+        this.easy_star.setGrid(this.world_grid);
+    }
+
+    get_coord_from_point(point) {
+        let row, column;
+        row = Math.floor(point.y / this.tile_dimensions.y);
+        column = Math.floor(point.x / this.tile_dimensions.x);
+        return { row: row, column: column };
+    }
+
+    get_point_from_coord(coord) {
+        let x, y;
+        x = (coord.column * this.tile_dimensions.x) + (this.tile_dimensions.x / 2);
+        y = (coord.row * this.tile_dimensions.y) + (this.tile_dimensions.y / 2);
+        return new Phaser.Point(x, y);
+    }
+}

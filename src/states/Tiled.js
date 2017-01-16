@@ -8,7 +8,7 @@ import Prefab from '../prefabs/Prefab'
 
 export default class Tiled extends Phaser.State {
 
-    constructor () {
+    constructor() {
         super();
 
         this.prefab_classes = {
@@ -20,7 +20,7 @@ export default class Tiled extends Phaser.State {
         };
     }
 
-    init (level_data) {
+    init(level_data) {
         let tileset_index;
         this.level_data = level_data;
 
@@ -40,7 +40,7 @@ export default class Tiled extends Phaser.State {
         }, this);
     }
 
-    create () {
+    create() {
         let group_name, object_layer, collision_tiles, world_grid, tile_dimensions, prefab_name;
 
         this.layers = {};
@@ -70,7 +70,7 @@ export default class Tiled extends Phaser.State {
         }
     }
 
-    create_object (object) {
+    create_object(object) {
         let object_y, object_x, position;
         object_y = object.y - (this.map.tileHeight / 2);
         object_x = object.x + (this.map.tileWidth / 2);
@@ -78,7 +78,7 @@ export default class Tiled extends Phaser.State {
         this.create_prefab(object.name, object, position);
     }
 
-    create_prefab (prefab_name, prefab_data, position) {
+    create_prefab(prefab_name, prefab_data, position) {
         let prefab;
         if (this.prefab_classes.hasOwnProperty(prefab_data.type)) {
             prefab = new this.prefab_classes[prefab_data.type](this, prefab_name, position, prefab_data.properties);
@@ -87,7 +87,7 @@ export default class Tiled extends Phaser.State {
         return prefab;
     }
 
-    find_prefab_in_tile (group, position) {
+    find_prefab_in_tile(group, position) {
         let found_prefab;
         this.groups[group].forEach(function (prefab) {
             if (prefab.x === position.x && prefab.y === position.y) {

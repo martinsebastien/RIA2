@@ -42,7 +42,7 @@ export default class extends JSONLevelState {
         battle_data = snapshot.val();
         if (battle_data.full) {
             this.new_battle.off();
-            this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: snapshot.key(), local_player: "player1", remote_player: "player2" });
+            this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: snapshot.key, local_player: "player1", remote_player: "player2" });
         }
     }
 

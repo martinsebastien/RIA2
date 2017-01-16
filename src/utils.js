@@ -10,7 +10,7 @@ export const setResponsiveWidth = (sprite, percent, parent) => {
   sprite.height = sprite.texture.height - (sprite.texture.height * percentWidth / 100)
 }
 
-class Create_prefab_from_pool {
+export class Create_prefab_from_pool {
 
     constructor (pool, prefab_constructor, game_state, prefab_name, prefab_position, prefab_properties) {
 

@@ -8,7 +8,7 @@ export default class extends Tiled {
 
     init(level_data, extra_parameters) {
         super.init(level_data);
-        this.battle_ref = firebase.child("battles").child(extra_parameters.battle_id);
+        this.battle_ref = bdd.database().ref().child("battles").child(extra_parameters.battle_id);
         this.local_player = extra_parameters.local_player;
         this.remote_player = extra_parameters.remote_player;
 
@@ -48,11 +48,11 @@ export default class extends Tiled {
         this.battle_ref.child(this.remote_player).child("prepared").on("value", this.start_battle.bind(this));
     }
 
-    start_battle() {
+    start_battle(snapshot) {
         let prepared;
-        prepared = snapshot.val();
+        prepared = snapshot.val;
         if (prepared) {
-            this.game.state.start("BootState", true, false, "assets/levels/battle_level.json", "BattleState", { battle_id: this.battle_ref.key(), local_player: this.local_player, remote_player: this.remote_player });
+            this.game.state.start("Boot", true, false, "assets/levels/battle_level.json", "Battle", { battle_id: this.battle_ref.key, local_player: this.local_player, remote_player: this.remote_player });
         }
     }
 
