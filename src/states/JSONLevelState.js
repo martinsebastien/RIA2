@@ -11,9 +11,9 @@ export default class extends Phaser.State {
   init (level_data) {
       this.level_data = level_data;
 
-      this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      this.scale.pageAlignHorizontally = true;
-      this.scale.pageAlignVertically = true;
+      //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      //this.scale.pageAlignHorizontally = true;
+      //this.scale.pageAlignVertically = true;
   }
 
   create () {

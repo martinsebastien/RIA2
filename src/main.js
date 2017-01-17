@@ -19,16 +19,16 @@ const config = {
     messagingSenderId: "43320763068"
 };
 
+export const GAME_WIDTH = window.innerWidth * window.devicePixelRatio;
+export const GAME_HEIGHT = window.innerHeight * window.devicePixelRatio;
+
 class Game extends Phaser.Game {
 
     constructor() {
         //let width = document.documentElement.clientWidth > 600 ? 600 : document.documentElement.clientWidth;
         //let height = document.documentElement.clientHeight > 600 ? 600 : document.documentElement.clientHeight;
 
-        let GAME_WIDTH = 1024;
-        let GAME_HEIGHT = 640;
-
-        super(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'content', null, false, false);
+        super((GAME_HEIGHT > GAME_WIDTH) ? GAME_HEIGHT : GAME_WIDTH, (GAME_HEIGHT > GAME_WIDTH) ? GAME_WIDTH : GAME_HEIGHT, Phaser.AUTO, 'content', null, false, false);
 
         this.state.add('Boot', BootState, false);                    // Boot the game (load the loading state)
         this.state.add('Splash', SplashState, false);                // Is the loading state

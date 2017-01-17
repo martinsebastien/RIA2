@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { GAME_HEIGHT, GAME_WIDTH } from '../main'
 
 export default class extends Phaser.State {
 
@@ -11,6 +12,20 @@ export default class extends Phaser.State {
         this.next_state = next_state;
         this.extra_parameters = extra_parameters;
 
+        //test scaling
+        this.game.scale.fullScreenTarget = this.parentElement;
+        this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL; // Important            
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.stage.disableVisibilityChange = true;
+        this.game.input.maxPointers = 1;
+        this.game.scale.setResizeCallback(function () {
+            this.resize(document.getElementById("content"), true);
+            // you would probably just use 
+            this.game.scale.setResizeCallback(this.resize, this);
+        }, this);
+        //end test scaling
     }
 
     preload() {
@@ -18,10 +33,23 @@ export default class extends Phaser.State {
     }
 
     create() {
-        var level_text, level_data;
+        let level_text, level_data;
         level_text = this.game.cache.getText("level1");
         level_data = JSON.parse(level_text);
-        this.game.state.start("Splash", true, false, level_data, this.next_state, this.extra_parameters);
 
+        this.input.onDown.add(this.goLarge, this);
+
+        this.game.state.start("Splash", true, false, level_data, this.next_state, this.extra_parameters);
     }
+
+    resize(element, logging) {
+        let scale = Math.min(window.innerWidth / this.game.width, window.innerHeight / this.game.height);
+        element.minHeight = window.innerHeight.toString() + "px";
+        this.game.scale.setUserScale(scale, scale, 0, 0);
+    }
+
+    goLarge(){
+        game.scale.startFullScreen();
+    }
+
 }
