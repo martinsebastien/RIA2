@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-# RIA2
-
-##CPNV project
-
-### API
-
-For this project, i'm going to use those API :
-- Google Play Games (which contains a buch of APIs) => https://developers.google.com/games/services/
-- Stripe (to handle the payments) => https://stripe.com/docs/api
-
-### Description
-
-I'm using Phaser.io to create a HexGame in which the player can complete success, rank up in a leaderboard and buy some cards.
-If I have the time, I plan to create a little backend service with nodeJs and ExpressJs to handle the datas.
-||||||| merged common ancestors
-=======
 # Phaser + ES6 + Webpack.
 #### A bootstrap project to create games with Phaser + ES6 + Webpack.
 
@@ -83,4 +66,3 @@ Big thanks to this great repos:
 https://github.com/belohlavek/phaser-es6-boilerplate
 
 https://github.com/cstuncsik/phaser-es6-demo
->>>>>>> df1d6f7
