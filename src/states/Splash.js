@@ -16,6 +16,7 @@ export default class extends Phaser.State {
     preload() {
         let assets, asset_loader, asset_key, asset;
         assets = this.level_data.assets;
+        this.load.image("wp_home", "assets/images/wp.jpg")
         for (asset_key in assets) { // load assets according to asset key
             if (assets.hasOwnProperty(asset_key)) {
                 asset = assets[asset_key];
