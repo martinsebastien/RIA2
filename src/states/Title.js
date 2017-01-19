@@ -12,6 +12,7 @@ export default class extends JSONLevelState {
     }
 
     create() {
+        this.scale.setGameSize(window.innerWidth, window.innerHeight);
         super.create();
         this.game.input.onDown.add(this.start_battle, this);
     }

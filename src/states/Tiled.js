@@ -24,9 +24,10 @@ export default class Tiled extends Phaser.State {
         let tileset_index;
         this.level_data = level_data;
 
-        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.scale.pageAlignHorizontally = true;
-        this.scale.pageAlignVertically = true;
+        this.scale.setGameSize(240, 240);
+        //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        //this.scale.pageAlignHorizontally = true;
+        //this.scale.pageAlignVertically = true;
 
         // start physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);

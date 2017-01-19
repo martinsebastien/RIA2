@@ -11,7 +11,7 @@
             "properties": {
                 "text": "Waiting for players to join",
                 "style": {
-                    "font": "20px Arial", 
+                    "font": "24px Arial", 
                     "fill": "#FFF"
                 },
                 "group": "hud",
