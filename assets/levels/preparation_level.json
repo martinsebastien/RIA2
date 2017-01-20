@@ -1,15 +1,17 @@
 {
     "assets": {
         "battle_tileset": {"type": "image", "source": "assets/images/open_tileset.png"},
-        "knight_image": {"type": "image", "source": "assets/images/knight.png"},
-        "princess_image": {"type": "image", "source": "assets/images/princess.png"},
-        "mage_image": {"type": "image", "source": "assets/images/mage.png"},
-        "archer_image": {"type": "image", "source": "assets/images/archer.png"},
         "rectangle_image": {"type": "image", "source": "assets/images/rectangle.png"},
         "healthbar_image": {"type": "image", "source": "assets/images/healthbar.png"},
         "highlighted_region_image": {"type": "image", "source": "assets/images/highlighted_region.png"},
         "player2_highlighted_region_image": {"type": "image", "source": "assets/images/player2_highlighted_region.png"},
-        
+        "wp_home": {"type": "images", "source": "assets/images/wp.jpg"},
+
+        "knight_image": {"type": "sprites", "source": "assets/images/dragon/dragon_walk.png", "generator" : "assets/images/dragon"},
+        "princess_image": {"type": "sprites", "source": "assets/images/assassin/assassin_walk.png", "generator" : "assets/images/assassin"},
+        "mage_image": {"type": "sprites", "source": "assets/images/mage/mage_walk.png", "generator" : "assets/images/mage"},
+        "archer_image": {"type": "sprites", "source": "assets/images/blaster/blaster_walk.png", "generator" : "assets/images/blaster"},
+
         "level_tilemap": {"type": "tilemap", "source": "assets/maps/preparation_map.json"}
     },
     "groups": [
