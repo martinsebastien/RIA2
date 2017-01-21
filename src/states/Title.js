@@ -13,11 +13,12 @@ export default class extends JSONLevelState {
 
     create() {
         this.scale.setGameSize(window.innerWidth, window.innerHeight);
-        this.add.sprite(0, 0, "wp_home");
-
-        let mainTitle = game.add.text(game.world.centerX, game.world.centerY - 100, "M A G I C");
-        let secondTitle = game.add.text(game.world.centerX, game.world.centerY + 20, "T A C T I C A L  L E G I O N S");
-        let clickStart = game.add.text(game.world.centerX, game.world.centerY + 130, "S T A R T");
+        let background = this.add.sprite(game.world.centerX, 0, "wp_home");
+        background.anchor.setTo(0.5, 0);
+        
+        let mainTitle = this.add.text(game.world.centerX, game.world.centerY - game.world.centerY/2, "M A G I C");
+        let secondTitle = this.add.text(game.world.centerX, game.world.centerY - (game.world.centerY/3 - 40), "T A C T I C A L  L E G I O N S");
+        let clickStart = this.add.text(game.world.centerX, game.world.centerY + game.world.centerY/2, "S T A R T");
         mainTitle.anchor.setTo(0.5);
         secondTitle.anchor.setTo(0.5);
         clickStart.anchor.setTo(0.5);

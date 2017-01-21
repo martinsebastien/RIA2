@@ -33,12 +33,15 @@ export default class extends Phaser.State {
 
   create_prefab (prefab_name, prefab_data) {
       let prefab_position, prefab;
+
       // create object according to its type
       if (this.prefab_classes.hasOwnProperty(prefab_data.type)) {
+
           if (prefab_data.position.x > 0 && prefab_data.position.x <= 1) {
+
               // position as percentage
-              prefab_position = new Phaser.Point(prefab_data.position.x * this.game.world.width,
-                  prefab_data.position.y * this.game.world.height);
+              prefab_position = new Phaser.Point(prefab_data.position.x * this.game.world.width, prefab_data.position.y * this.game.world.height);
+              
           } else {
               // position as absolute number
               prefab_position = prefab_data.position;

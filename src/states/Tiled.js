@@ -24,7 +24,7 @@ export default class Tiled extends Phaser.State {
         let tileset_index;
         this.level_data = level_data;
 
-        this.scale.setGameSize(240, 240);
+        this.scale.setGameSize(700, 525);
         //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         //this.scale.pageAlignHorizontally = true;
         //this.scale.pageAlignVertically = true;
@@ -34,9 +34,11 @@ export default class Tiled extends Phaser.State {
         this.game.physics.arcade.gravity.y = 0;
 
         this.map = this.game.add.tilemap(level_data.map.key);
+        console.log(this.map.tilesets);
         tileset_index = 0;
-        this.map.tilesets.forEach(function (tileset) {
-            this.map.addTilesetImage(tileset.name, level_data.map.tilesets[tileset_index]);
+        this.map.tilesets.forEach(function (tileset, index) {
+            console.log(level_data.map.tilesets);
+            this.map.addTilesetImage(tileset.name, level_data.map.tilesets[0]);
             tileset_index += 1;
         }, this);
     }

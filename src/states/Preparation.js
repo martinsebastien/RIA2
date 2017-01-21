@@ -12,10 +12,10 @@ export default class extends Tiled {
         this.local_player = extra_parameters.local_player;
         this.remote_player = extra_parameters.remote_player;
 
-        this.units_to_place = [{ type: "unit", name: this.local_player + "_knight_unit", properties: { texture: "knight_image", group: this.local_player + "_units", unit_class: "knight" } },
-        { type: "unit", name: this.local_player + "_archer_unit", properties: { texture: "archer_image", group: this.local_player + "_units", unit_class: "archer" } },
+        this.units_to_place = [{ type: "unit", name: this.local_player + "_dragon_unit", properties: { texture: "dragon_image", group: this.local_player + "_units", unit_class: "dragon" } },
+        { type: "unit", name: this.local_player + "_blaster_unit", properties: { texture: "blaster_image", group: this.local_player + "_units", unit_class: "blaster" } },
         { type: "unit", name: this.local_player + "_mage_unit", properties: { texture: "mage_image", group: this.local_player + "_units", unit_class: "mage" } },
-        { type: "unit", name: this.local_player + "_princess_unit", properties: { texture: "princess_image", group: this.local_player + "_units", unit_class: "princess" } }];
+        { type: "unit", name: this.local_player + "_assassin_unit", properties: { texture: "assassin_image", group: this.local_player + "_units", unit_class: "assassin" } }];
     }
 
     create() {

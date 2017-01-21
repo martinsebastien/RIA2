@@ -27,11 +27,13 @@ export default class extends JSONLevelState {
         for (battle in battles) {
             if (battles.hasOwnProperty(battle) && !battles[battle].full) {
                 chosen_battle = battle;
+                // On trouve une battle avec de la place dans firebase, place le joueur et initialise l'etat FULL de la battle
                 bdd.database().ref().child("battles").child(chosen_battle).child("full").set(true, this.join_battle.bind(this, chosen_battle));
                 break;
             }
         }
         if (!chosen_battle) {
+            // On met les joueurs dans une battle dans firebase
             this.new_battle = bdd.database().ref().child("battles").push({ player1: this.INITIAL_PLAYER_DATA, player2: this.INITIAL_PLAYER_DATA, full: false });
             this.new_battle.on("value", this.host_battle.bind(this));
         }
@@ -41,6 +43,7 @@ export default class extends JSONLevelState {
         let battle_data;
         battle_data = snapshot.val();
         if (battle_data.full) {
+            //Si la game est pleine, on ferme la battle
             this.new_battle.off();
             this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: snapshot.key, local_player: "player1", remote_player: "player2" });
         }

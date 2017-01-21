@@ -27,7 +27,7 @@
             "properties": {
                 "text": "S T A R T",
                 "style": {
-                    "font": "36px Roboto", 
+                    "font": "36px Arial", 
                     "fill": "#FFF",
                     "font-weight": "bold"
                 },

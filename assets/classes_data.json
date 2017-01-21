@@ -1,5 +1,5 @@
 {
-    "knight": {
+    "dragon": {
         "health": 12,
         "attack": 8,
         "defense": 3,
@@ -7,7 +7,7 @@
         "walking_radius": 3,
         "attack_range": 1
     },
-    "archer": {
+    "blaster": {
         "health": 5,
         "attack": 5,
         "defense": 1,
@@ -15,7 +15,7 @@
         "walking_radius": 5,
         "attack_range": 5
     },
-    "princess": {
+    "assassin": {
         "health": 8,
         "attack": 12,
         "defense": 2,

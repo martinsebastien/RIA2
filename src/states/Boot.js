@@ -22,7 +22,6 @@ export default class extends Phaser.State {
         this.game.input.maxPointers = 1;
         this.game.scale.setResizeCallback(function () {
             this.resize(document.getElementById("content"), true);
-            // you would probably just use 
             this.game.scale.setResizeCallback(this.resize, this);
         }, this);
         //end test scaling
@@ -30,6 +29,7 @@ export default class extends Phaser.State {
 
     preload() {
         this.load.text("level1", this.level_file);
+        this.load.image("wp_home", "assets/images/wp.jpg");
     }
 
     create() {
