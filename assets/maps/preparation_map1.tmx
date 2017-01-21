@@ -618,76 +618,76 @@
   </data>
  </layer>
  <objectgroup name="regions">
-  <object id="1" name="player1_region0" type="place_region" gid="73" x="253.333" y="306" width="16" height="16">
+  <object id="1" name="player1_region0" type="place_region" gid="73" x="245" y="315" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player1"/>
     <property name="texture" value="highlighted_region_image"/>
    </properties>
   </object>
-  <object id="2" name="player1_region1" type="place_region" gid="73" x="288.667" y="306" width="16" height="16">
+  <object id="2" name="player1_region1" type="place_region" gid="73" x="280" y="315" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player1"/>
     <property name="texture" value="highlighted_region_image"/>
    </properties>
   </object>
-  <object id="3" name="player1_region2" type="place_region" gid="73" x="323.333" y="306" width="16" height="16">
+  <object id="3" name="player1_region2" type="place_region" gid="73" x="315" y="315" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player1"/>
     <property name="texture" value="highlighted_region_image"/>
    </properties>
   </object>
-  <object id="4" name="player1_region3" type="place_region" gid="73" x="358.667" y="307.333" width="16" height="16">
+  <object id="4" name="player1_region3" type="place_region" gid="73" x="350" y="315" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player1"/>
     <property name="texture" value="highlighted_region_image"/>
    </properties>
   </object>
-  <object id="5" name="player1_region4" type="place_region" gid="73" x="394.667" y="306.667" width="16" height="16">
+  <object id="5" name="player1_region4" type="place_region" gid="73" x="385" y="315" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player1"/>
     <property name="texture" value="highlighted_region_image"/>
    </properties>
   </object>
-  <object id="6" name="current_unit_sprite" type="unit_sprite" gid="73" x="44" y="60.6667" width="16" height="16">
+  <object id="6" name="current_unit_sprite" type="unit_sprite" gid="73" x="35" y="70" width="35" height="35">
    <properties>
     <property name="group" value="unit_sprites"/>
     <property name="texture" value="knight_image"/>
    </properties>
   </object>
-  <object id="7" name="player2_region0" type="place_region" gid="65" x="114" y="62" width="16" height="16">
+  <object id="7" name="player2_region0" type="place_region" gid="65" x="105" y="70" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player2"/>
     <property name="texture" value="player2_highlighted_region_image"/>
    </properties>
   </object>
-  <object id="8" name="player2_region1" type="place_region" gid="65" x="149.333" y="62" width="16" height="16">
+  <object id="8" name="player2_region1" type="place_region" gid="65" x="140" y="70" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player2"/>
     <property name="texture" value="player2_highlighted_region_image"/>
    </properties>
   </object>
-  <object id="9" name="player2_region2" type="place_region" gid="65" x="184" y="60" width="16" height="16">
+  <object id="9" name="player2_region2" type="place_region" gid="65" x="175" y="70" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player2"/>
     <property name="texture" value="player2_highlighted_region_image"/>
    </properties>
   </object>
-  <object id="10" name="player2_region3" type="place_region" gid="65" x="220" y="61.3333" width="16" height="16">
+  <object id="10" name="player2_region3" type="place_region" gid="65" x="210" y="70" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player2"/>
     <property name="texture" value="player2_highlighted_region_image"/>
    </properties>
   </object>
-  <object id="11" name="player2_region4" type="place_region" gid="65" x="253.333" y="60.6667" width="16" height="16">
+  <object id="11" name="player2_region4" type="place_region" gid="65" x="245" y="70" width="35" height="35">
    <properties>
     <property name="group" value="place_regions"/>
     <property name="player" value="player2"/>

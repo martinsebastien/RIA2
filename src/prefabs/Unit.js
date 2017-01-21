@@ -12,7 +12,7 @@ export default class Unit extends Prefab {
     load_stats(classes_data) {
         this.stats = Object.create(classes_data[this.unit_class]);
 
-        this.healthbar = this.game_state.game.add.sprite(this.x, this.y - this.height, "healthbar_image");
+        this.healthbar = this.game_state.game.add.sprite(this.x, this.y - (this.height / 2 + 5), "healthbar_image");
         this.healthbar.scale.setTo(this.stats.health, 1);
 
         this.attacked_tween = this.game_state.game.add.tween(this);
@@ -35,6 +35,7 @@ export default class Unit extends Prefab {
         path.forEach(function (position) {
             moving_tween.to({ x: position.x, y: position.y }, Phaser.Timer.SECOND * 0.3);
             healthbar_moving_tween.to({ x: position.x, y: position.y - this.height }, Phaser.Timer.SECOND * 0.3);
+            this.faceNextTile(moving_tween);
         }, this);
 
         moving_tween.start();
@@ -46,17 +47,13 @@ export default class Unit extends Prefab {
     }
 
     calculate_damage(target_unit) {
-        let random_attack, random_defense, damage;
-
-        random_attack = this.game_state.game.rnd.between(0, this.stats.attack);
-        random_defense = this.game_state.game.rnd.between(0, target_unit.stats.defense);
-
-        damage = Math.max(random_attack - random_defense, 0);
-
+        let damage = this.stats.attack - target_unit.stats.defense;
+        console.log(damage);
         return damage;
     }
 
     receive_damage(damage) {
+        console.log(damage);
         this.stats.health -= damage;
 
         this.healthbar.scale.setTo(this.stats.health, 1);
@@ -70,5 +67,26 @@ export default class Unit extends Prefab {
     restore_tint() {
         this.tint = 0xFFFFFF;
     }
+
+    faceNextTile(tween) {
+
+        let isVerticalMovement = tween.properties.y == this.position.y;
+
+        if (isVerticalMovement) {
+            if (tween.properties.x > this.position.x) {
+                this.walkRight();
+            } else {
+                this.walkLeft();
+            }
+        } else {
+            if (tween.properties.y > this.position.y) {
+                this.walkDown();
+            } else {
+                this.walkUp();
+            }
+
+        }
+    }
+
 
 }

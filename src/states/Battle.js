@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import Tiled from './Tiled'
 import Pathfinding from '../plugins/Pathfinding'
 import BreadthFirstSearch from '../plugins/BreadthFirstSearch'
-import PriorityQueue from 'priorityqueuejs'
+import PriorityQueue from '../priority-queue.min'
 import {Create_prefab_from_pool} from '../utils'
 import MoveRegion from '../prefabs/MoveRegion'
 import AttackRegion from '../prefabs/AttackRegion'
@@ -68,6 +68,7 @@ export default class extends Tiled {
         return unit_a.prefab.act_turn - unit_b.prefab.act_turn;
       }
     );
+    console.log(this.units_queue);
 
     this.queue_player_units(battle_data, "player1");
     this.queue_player_units(battle_data, "player2");
@@ -84,7 +85,7 @@ export default class extends Tiled {
         unit_data = battle_data[player].units[unit_key];
         unit_prefab = this.create_prefab(unit_data.name, unit_data, unit_data.position);
         unit_prefab.load_stats(this.classes_data);
-        this.units_queue.enq({ player: player, prefab: unit_prefab });
+        this.units_queue.queue({ player: player, prefab: unit_prefab });
       }
     }
   }
@@ -108,18 +109,26 @@ export default class extends Tiled {
   }
 
   next_turn() {
+    console.log(this.current_unit);
+
     if (this.groups.player1_units.countLiving() === 0 || this.groups.player2_units.countLiving() === 0) {
       this.game_over();
     } else {
+
+      // clear all the highlight_regions
       this.clear_previous_turn();
-      this.current_unit = this.units_queue.deq();
+
+      //remove the current unit turn from the queue
+      this.current_unit = this.units_queue.dequeue();
       if (this.current_unit.prefab.alive) {
         this.current_unit.prefab.tint = (this.current_unit.prefab.name.search("player1") !== -1) ? 0x0000ff : 0xff0000;
+
         if (this.current_unit.player === this.local_player) {
           this.prefabs.menu.show(true);
         }
+
         this.current_unit.prefab.calculate_act_turn(this.current_unit.prefab.act_turn);
-        this.units_queue.enq(this.current_unit);
+        this.units_queue.queue(this.current_unit);
       } else {
         this.send_wait_command();
       }

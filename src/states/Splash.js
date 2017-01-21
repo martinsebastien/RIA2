@@ -27,7 +27,6 @@ export default class extends Phaser.State {
                         this.load.spritesheet(asset_key, asset.source, asset.frame_width, asset.frame_height, asset.frames, asset.margin, asset.spacing);
                         break;
                     case "tilemap":
-                        console.log(asset_key, asset.source);
                         this.load.tilemap(asset_key, asset.source, null, Phaser.Tilemap.TILED_JSON);
                         break;
                     case "sprites":

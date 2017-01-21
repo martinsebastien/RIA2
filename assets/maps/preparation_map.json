@@ -37,7 +37,7 @@
          "objects":[
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":1,
                  "name":"player1_region0",
                  "properties":
@@ -55,13 +55,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":253.333333333333,
-                 "y":306
+                 "width":35,
+                 "x":245,
+                 "y":315
                 }, 
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":2,
                  "name":"player1_region1",
                  "properties":
@@ -79,13 +79,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":288.666666666667,
-                 "y":306
+                 "width":35,
+                 "x":280,
+                 "y":315
                 }, 
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":3,
                  "name":"player1_region2",
                  "properties":
@@ -103,13 +103,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":323.333333333333,
-                 "y":306
+                 "width":35,
+                 "x":315,
+                 "y":315
                 }, 
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":4,
                  "name":"player1_region3",
                  "properties":
@@ -127,13 +127,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":358.666666666667,
-                 "y":307.333333333333
+                 "width":35,
+                 "x":350,
+                 "y":315
                 }, 
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":5,
                  "name":"player1_region4",
                  "properties":
@@ -151,13 +151,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":394.666666666667,
-                 "y":306.666666666667
+                 "width":35,
+                 "x":385,
+                 "y":315
                 }, 
                 {
                  "gid":73,
-                 "height":16,
+                 "height":35,
                  "id":6,
                  "name":"current_unit_sprite",
                  "properties":
@@ -173,13 +173,13 @@
                  "rotation":0,
                  "type":"unit_sprite",
                  "visible":true,
-                 "width":16,
-                 "x":44,
-                 "y":60.6666666666667
+                 "width":35,
+                 "x":35,
+                 "y":70
                 }, 
                 {
                  "gid":65,
-                 "height":16,
+                 "height":35,
                  "id":7,
                  "name":"player2_region0",
                  "properties":
@@ -197,13 +197,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":114,
-                 "y":62
+                 "width":35,
+                 "x":105,
+                 "y":70
                 }, 
                 {
                  "gid":65,
-                 "height":16,
+                 "height":35,
                  "id":8,
                  "name":"player2_region1",
                  "properties":
@@ -221,13 +221,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":149.333333333333,
-                 "y":62
+                 "width":35,
+                 "x":140,
+                 "y":70
                 }, 
                 {
                  "gid":65,
-                 "height":16,
+                 "height":35,
                  "id":9,
                  "name":"player2_region2",
                  "properties":
@@ -245,13 +245,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":184,
-                 "y":60
+                 "width":35,
+                 "x":175,
+                 "y":70
                 }, 
                 {
                  "gid":65,
-                 "height":16,
+                 "height":35,
                  "id":10,
                  "name":"player2_region3",
                  "properties":
@@ -269,13 +269,13 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":220,
-                 "y":61.3333333333333
+                 "width":35,
+                 "x":210,
+                 "y":70
                 }, 
                 {
                  "gid":65,
-                 "height":16,
+                 "height":35,
                  "id":11,
                  "name":"player2_region4",
                  "properties":
@@ -293,9 +293,9 @@
                  "rotation":0,
                  "type":"place_region",
                  "visible":true,
-                 "width":16,
-                 "x":253.333333333333,
-                 "y":60.6666666666667
+                 "width":35,
+                 "x":245,
+                 "y":70
                 }],
          "opacity":1,
          "type":"objectgroup",
