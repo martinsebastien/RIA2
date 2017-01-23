@@ -42,6 +42,7 @@ export default class extends JSONLevelState {
     host_battle(snapshot) {
         let battle_data;
         battle_data = snapshot.val();
+        console.log(battle_data.full);
         if (battle_data.full) {
             //Si la game est pleine, on ferme la battle
             this.new_battle.off();
@@ -50,6 +51,7 @@ export default class extends JSONLevelState {
     }
 
     join_battle(battle_id) {
+        console.log();
         this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: battle_id, local_player: "player2", remote_player: "player1" });
     }
 

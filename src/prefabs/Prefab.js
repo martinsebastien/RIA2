@@ -27,8 +27,6 @@ export default class Prefab extends Phaser.Sprite {
     }
 
     setupAnimations() {
-        this.anchor.setTo(0.5, 0.5);
-
         this.animations.add('walk_down', [
             "walk/down/0.png",
             "walk/down/1.png",

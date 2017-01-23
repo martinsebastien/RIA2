@@ -9,6 +9,8 @@ export default class extends Tiled {
     init(level_data, extra_parameters) {
         super.init(level_data);
         this.battle_ref = bdd.database().ref().child("battles").child(extra_parameters.battle_id);
+        console.log(this.battle_ref);
+
         this.local_player = extra_parameters.local_player;
         this.remote_player = extra_parameters.remote_player;
 
@@ -24,14 +26,19 @@ export default class extends Tiled {
         this.current_unit_to_place = this.units_to_place.shift();
         this.prefabs.current_unit_sprite.loadTexture(this.current_unit_to_place.properties.texture);
 
+        this.battle_ref.on("value", this.disconnect.bind(this));
+
         this.battle_ref.onDisconnect().remove();
+
         this.game.stage.disableVisibilityChange = true;
     }
 
     place_unit(position) {
         this.current_unit_to_place.position = position;
+
         this.battle_ref.child(this.local_player).child("units").push(this.current_unit_to_place);
         this.create_prefab(this.current_unit_to_place.name, { type: "unit_sprite", properties: { texture: this.current_unit_to_place.properties.texture, group: "unit_sprites" } }, position);
+
         if (this.units_to_place.length > 0) {
             this.current_unit_to_place = this.units_to_place.shift();
             this.prefabs.current_unit_sprite.loadTexture(this.current_unit_to_place.properties.texture);
@@ -40,6 +47,7 @@ export default class extends Tiled {
             this.groups.place_regions.forEach(function (region) {
                 region.kill();
             }, this);
+
             this.battle_ref.child(this.local_player).child("prepared").set(true, this.wait_for_enemy.bind(this));
         }
     }
@@ -49,10 +57,16 @@ export default class extends Tiled {
     }
 
     start_battle(snapshot) {
-        let prepared;
-        prepared = snapshot.val;
+        let prepared = snapshot.val();
         if (prepared) {
             this.game.state.start("Boot", true, false, "assets/levels/battle_level.json", "Battle", { battle_id: this.battle_ref.key, local_player: this.local_player, remote_player: this.remote_player });
+        }
+    }
+
+    disconnect(snapshot) {
+        console.log(snapshot.val());
+        if (!snapshot.val()) {
+            this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
         }
     }
 

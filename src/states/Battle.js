@@ -2,8 +2,9 @@ import Phaser from 'phaser'
 import Tiled from './Tiled'
 import Pathfinding from '../plugins/Pathfinding'
 import BreadthFirstSearch from '../plugins/BreadthFirstSearch'
-import PriorityQueue from '../priority-queue.min'
-import {Create_prefab_from_pool} from '../utils'
+import PriorityQueue from 'priorityqueuejs'
+import Fifo from 'fifo'
+import { Create_prefab_from_pool } from '../utils'
 import MoveRegion from '../prefabs/MoveRegion'
 import AttackRegion from '../prefabs/AttackRegion'
 
@@ -34,11 +35,14 @@ export default class extends Tiled {
     this.groups.menu_items.forEach(function (menu_item) {
       this.prefabs.menu.add_item(menu_item);
     }, this);
+
     world_grid = this.create_world_grid();
+
     this.pathfinding = this.game.plugins.add(Pathfinding, world_grid, [-1], this.tile_dimensions); // Previously Tactics.Pathfinding
     this.bfs = this.game.plugins.add(BreadthFirstSearch, this.map);
-
     this.classes_data = JSON.parse(this.game.cache.getText("classes_data"));
+
+    this.battle_ref.on("value", this.disconnect.bind(this));
 
     this.battle_ref.once("value", this.create_units_queue.bind(this));
 
@@ -51,6 +55,7 @@ export default class extends Tiled {
     let obstacles_layer, row_index, column_index, world_grid;
     obstacles_layer = this.map.layers[1];
     world_grid = [];
+
     for (row_index = 0; row_index < this.map.height; row_index += 1) {
       world_grid.push([]);
       for (column_index = 0; column_index < this.map.width; column_index += 1) {
@@ -65,14 +70,19 @@ export default class extends Tiled {
     battle_data = snapshot.val();
 
     this.units_queue = new PriorityQueue(function (unit_a, unit_b) {
-        return unit_a.prefab.act_turn - unit_b.prefab.act_turn;
-      }
+      return unit_a.prefab.act_turn - unit_b.prefab.act_turn;
+    }
     );
-    console.log(this.units_queue);
 
     this.queue_player_units(battle_data, "player1");
     this.queue_player_units(battle_data, "player2");
 
+    this.fifo_queue_units = new Fifo();
+    console.log(this.units_queue);
+    for (let unit in this.units_queue._elements) {
+      this.fifo_queue_units.push(this.units_queue._elements[unit]);
+    }
+    console.log(this.fifo_queue_units);
     this.battle_ref.child("command").on("value", this.receive_command.bind(this));
 
     this.next_turn();
@@ -80,12 +90,16 @@ export default class extends Tiled {
 
   queue_player_units(battle_data, player) {
     let unit_key, unit_data, unit_prefab;
+
     for (unit_key in battle_data[player].units) {
+
       if (battle_data[player].units.hasOwnProperty(unit_key)) {
+
         unit_data = battle_data[player].units[unit_key];
         unit_prefab = this.create_prefab(unit_data.name, unit_data, unit_data.position);
         unit_prefab.load_stats(this.classes_data);
-        this.units_queue.queue({ player: player, prefab: unit_prefab });
+
+        this.units_queue.enq({ player: player, prefab: unit_prefab });
       }
     }
   }
@@ -109,26 +123,26 @@ export default class extends Tiled {
   }
 
   next_turn() {
-    console.log(this.current_unit);
-
     if (this.groups.player1_units.countLiving() === 0 || this.groups.player2_units.countLiving() === 0) {
       this.game_over();
     } else {
 
-      // clear all the highlight_regions
+      // Clear all the highlight_regions
       this.clear_previous_turn();
+      this.current_unit = this.fifo_queue_units.shift();
+      console.log(this.fifo_queue_units.length);
 
-      //remove the current unit turn from the queue
-      this.current_unit = this.units_queue.dequeue();
       if (this.current_unit.prefab.alive) {
         this.current_unit.prefab.tint = (this.current_unit.prefab.name.search("player1") !== -1) ? 0x0000ff : 0xff0000;
 
         if (this.current_unit.player === this.local_player) {
           this.prefabs.menu.show(true);
+        } else {
+          this.prefabs.menu.show(false);
         }
 
         this.current_unit.prefab.calculate_act_turn(this.current_unit.prefab.act_turn);
-        this.units_queue.queue(this.current_unit);
+        this.fifo_queue_units.push(this.current_unit);
       } else {
         this.send_wait_command();
       }
@@ -136,6 +150,9 @@ export default class extends Tiled {
   }
 
   game_over() {
+    if (bdd.database().ref().child("battles") == null) {
+      this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
+    }
     let winner, winner_message;
     winner = (this.groups.player1_units.countLiving() === 0) ? "player2" : "player1";
     winner_message = this.game.add.text(this.game.world.centerX, this.game.world.centerY, winner + " wins", { font: "24px Arial", fill: "#FFF" });
@@ -145,6 +162,14 @@ export default class extends Tiled {
     }, this);
 
   }
+
+  disconnect(snapshot) {
+    console.log(snapshot.val());
+    if (!snapshot.val()) {
+      this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
+    }
+  }
+
 
   clear_previous_turn() {
     if (this.current_unit) {
@@ -199,7 +224,7 @@ export default class extends Tiled {
     this.battle_ref.child("command").set({ type: "wait", unit: this.current_unit.prefab.name });
   }
 
-  wait(){
+  wait() {
     this.next_turn();
   }
 }
