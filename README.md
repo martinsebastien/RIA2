@@ -138,4 +138,31 @@ Une fois que vous vous êtes identifié au jeu, vous pouvez le retrouver dans vo
 
 Dans mon projet, je récupère également les informations basiques de l'utilisateur (comme son nom, son avatar etc...) et j'affiche l'avatar de l'utilisateur authentifier en haut à droite de la page.
 
-![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/profilpic.png "Screen depuis le jeu")
+![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/profilpic.PNG "Screen depuis le jeu")
+
+## Firebase API
+
+Firebase est un backend as a service. C'est à dire une base de donnée dynamique créée chez Google. Elle permet d'accéder à des statistique d'utilisation sur la console de firebase et et notifié via des écouteurs tous les changements en temps réel aux autres utilisateurs connecté à la base. C'est grâce à ce système ultra puissant que j'ai développé le côté multijoueur de mon jeu.
+
+Afin d'utiliser l'API firebase, il vous faut vous connecter avec votre compte Google et créer un nouveau projet. A partir de là, ajouter le code suivant à votre projet :
+```HTML
+<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "API_KEY",
+    authDomain: "magic-legions.firebaseapp.com",
+    databaseURL: "https://magic-legions.firebaseio.com",
+    storageBucket: "magic-legions.appspot.com",
+    messagingSenderId: "43320763068"
+  };
+  firebase.initializeApp(config);
+</script>
+```
+Dans mon cas, je n'ai pas utilisé le CDN firebase mais le module NPM de firebase afin de pouvoir le compilé dans mon fichier bundle grâce à webpack et ainsi gagné en vitesse et en requête HTTP pour charger mon application.
+
+J'ai initialisé la config et l'initialisation de mon API firebase grâce à une classe ES6 afin de l'utiliser comme un objet (que j'ai nommé BDD).
+
+Après la création d'une partie et le placement des joueurs, voici à quoi ressemble la structure de ma base de donnée firebase : 
+![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/profilpic.PNG "Screen depuis le jeu")
+
