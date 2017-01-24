@@ -62,4 +62,5 @@ Executer la commande suivante:
 
  # Documentation technique
 
- ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+ ![alt text](https://github.com/martinsebastien/RIA2/blob/master/assets/images/screen1.png "Screen depuis Google Play")
+ ![alt text](https://github.com/martinsebastien/RIA2/blob/master/assets/images/screen2.png "Screen depuis Google Play")
