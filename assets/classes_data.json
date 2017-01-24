@@ -1,10 +1,10 @@
 {
     "dragon": {
-        "health": 12,
-        "attack": 8,
-        "defense": 3,
+        "health": 16,
+        "attack": 7,
+        "defense": 4,
         "speed": 2,
-        "walking_radius": 3,
+        "walking_radius": 4,
         "attack_range": 1
     },
     "blaster": {
@@ -13,14 +13,14 @@
         "defense": 1,
         "speed": 3,
         "walking_radius": 5,
-        "attack_range": 5
+        "attack_range": 6
     },
     "assassin": {
-        "health": 8,
+        "health": 12,
         "attack": 12,
         "defense": 2,
         "speed": 2,
-        "walking_radius": 4,
+        "walking_radius": 6,
         "attack_range": 1
     },
     "mage": {

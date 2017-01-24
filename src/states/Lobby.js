@@ -19,6 +19,7 @@ export default class extends JSONLevelState {
     create() {
         super.create();
         bdd.database().ref().child("battles").once("value", this.find_battle.bind(this));
+        document.getElementById("container-google-button").style.display = "none";
     }
 
     find_battle(snapshot) {

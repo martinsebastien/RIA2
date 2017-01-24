@@ -15,10 +15,12 @@ export default class extends JSONLevelState {
         this.scale.setGameSize(window.innerWidth, window.innerHeight);
         let background = this.add.sprite(game.world.centerX, 0, "wp_home");
         background.anchor.setTo(0.5, 0);
-        
-        let mainTitle = this.add.text(game.world.centerX, game.world.centerY - game.world.centerY/2, "M A G I C");
-        let secondTitle = this.add.text(game.world.centerX, game.world.centerY - (game.world.centerY/3 - 40), "T A C T I C A L  L E G I O N S");
-        let clickStart = this.add.text(game.world.centerX, game.world.centerY + game.world.centerY/2, "S T A R T");
+
+        document.getElementById("container-google-button").style.display = "block";
+
+        let mainTitle = this.add.text(game.world.centerX, game.world.centerY - game.world.centerY / 2, "M A G I C");
+        let secondTitle = this.add.text(game.world.centerX, game.world.centerY - (game.world.centerY / 3 - 40), "T A C T I C A L  L E G I O N S");
+        let clickStart = this.add.text(game.world.centerX, game.world.centerY + game.world.centerY / 2, "S T A R T");
         mainTitle.anchor.setTo(0.5);
         secondTitle.anchor.setTo(0.5);
         clickStart.anchor.setTo(0.5);
@@ -42,7 +44,16 @@ export default class extends JSONLevelState {
         secondTitle.style.fill = "white";
         clickStart.style.fill = "white";
 
-        this.game.input.onDown.add(this.start_battle, this);
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+            this.game.input.onDown.add(this.start_battle, this);
+        }
+
+
     }
 
     start_battle() {

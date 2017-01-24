@@ -27,6 +27,7 @@
     "fifo": "^2.3.0",
     "firebase": "^3.6.5",
     "phaser-ce": "^2.7.1",
-    "priorityqueuejs": "^1.0.0"
+    "priorityqueuejs": "^1.0.0",
+    "whatwg-fetch": "^2.0.2"
   }
 }

@@ -23,7 +23,10 @@
     <meta name="google-signin-client_id" content="462519420038-aj9brss5r84pcvc9tearpc2l9qhh8od3.apps.googleusercontent.com" />
     <meta name="google-signin-cookiepolicy" content="single_host_origin" />
     <meta name="google-signin-callback" content="signinCallback" />
-    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/games" />
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/games  https://www.googleapis.com/auth/plus.login"
+    />
+
+    <meta name="google-site-verification" content="19puSJkBq70gUoJoBK-rPlLSmt7FQjuG631v9OjW1R4" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="assets/icons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/icons/apple-icon-60x60.png">
@@ -39,6 +42,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
     <link rel="manifest" href="assets/icons/manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -59,15 +63,20 @@
             background-position: center;
             text-align: center;
             position: absolute;
-            z-index: -10000;
+            z-index: 10000;
         }
         #margin-top{
-            height: 25%;
+            height: 72.5%;
             width: 100%;
         }
         #container-google-button{
             width: 120px;
+            height: 100%;
+            position: absolute;
+            z-index: 1000;
             margin: 0 auto;
+            margin-left: calc(50% - 60px);
+            display: none;
         }
         h1{
             font-family: 'Roboto', sans-serif;
@@ -86,18 +95,54 @@
             font-size: 36px;
             text-shadow: -3px 3px 30px rgba(0,0,0,0.4);
         }
+
+        #profile-google{
+            position: fixed;
+            height: 50px;
+            width: 50px;
+            right: 15px;
+            top: 15px;
+            border-radius: 50px;
+            background-position: center center;
+            background-size: 50px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        #popup-achievements{
+            position: fixed;
+            top: -300px;
+            width: 200px;
+            margin-left: calc(50% - 100px);
+            border-radius: 5px;
+            background: limegreen;
+            color: white;
+            text-align: center;
+            z-index: 1000000;
+            font-family: 'Roboto';
+            box-shadow: -3px 3px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 1s;
+        }
+        #title-success{
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
 <body>
-    <div id="wp-home">
-        <h1>Magic</h1>
-        <h2>Tactical Legions</h2>
+    <div id="container-google-button">
         <div id="margin-top"></div>
-        <div id="container-google-button">
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
+
+    <div id="popup-achievements">
+        <p id="title-success"><strong>Congratulations !</strong></p>
+        <p>You achieved a success</p>
+    </div>
+
+    <div id="profile-google"></div>
 
     <div id="content"></div>
 
@@ -106,7 +151,61 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
+    <script>
 
+        // Callback function when the user is registered
+        function onSignIn(googleUser) {
+            // Get the basic profile of the user
+            var profile = googleUser.getBasicProfile();
+            // Show the profile picture of the user in the box top right
+            document.getElementById("profile-google").style.backgroundImage = "url('" + profile.getImageUrl() + "')";
+
+            // load the API games
+            gapi.client.load('games', 'v1', function (response) {
+                discoveryDocs = response;
+                console.log(response);
+            });
+
+            // list all the achievements in the console
+            gapi.client.request({
+                path: '/games/v1/achievements',
+                method: 'get',
+                callback: function (response) {
+                    console.log(response);// Do something interesting with the response
+                }
+            });
+
+            // Unlock the achievement : connected for the first time
+            gapi.client.request({
+                path: '/games/v1/achievements/CgkIhom5grsNEAIQAg/unlock',
+                method: 'post',
+                callback: function (response) {
+                    if (response.newlyUnlocked) {
+                        popupSuccess();
+                    }
+                    console.log(response);// Do something interesting with the response
+                }
+            });
+
+            //launch the game if the user is correctly identify
+            if (window.game.state.current == "Title") {
+                window.game.state.start("Boot", true, false, "assets/levels/lobby.json", "Lobby");
+            }
+        }
+
+        function popupSuccess() {
+            var popup = document.getElementById("popup-achievements");
+            popup.style.top = "15px";
+            popup.style.opacity = 1;
+
+            setTimeout(()=> {
+                popup.style.top = "-300px";
+                popup.style.opacity = 0;
+            }, 4500)
+        }
+
+
+    </script>
 </body>
 
 </html>
