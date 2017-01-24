@@ -47,12 +47,13 @@ export default class extends JSONLevelState {
         if (battle_data.full) {
             //Si la game est pleine, on ferme la battle
             this.new_battle.off();
+            window.isLocalPlayer = "player1";
             this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: snapshot.key, local_player: "player1", remote_player: "player2" });
         }
     }
 
     join_battle(battle_id) {
-        console.log();
+        window.isLocalPlayer = "player2"; 
         this.game.state.start("Boot", true, false, "assets/levels/preparation_level.json", "Preparation", { battle_id: battle_id, local_player: "player2", remote_player: "player1" });
     }
 

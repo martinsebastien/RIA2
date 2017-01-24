@@ -67,6 +67,7 @@ export default class extends Tiled {
         console.log(snapshot.val());
         if (!snapshot.val()) {
             this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
+            popupDisconnect();
         }
     }
 

@@ -107,6 +107,7 @@
             background-size: 50px;
             z-index: 1000;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            display: none;
         }
 
         #popup-achievements{
@@ -116,6 +117,51 @@
             margin-left: calc(50% - 100px);
             border-radius: 5px;
             background: limegreen;
+            color: white;
+            text-align: center;
+            z-index: 1000000;
+            font-family: 'Roboto';
+            box-shadow: -3px 3px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 1s;
+        }
+        #popup-disconnected{
+            position: fixed;
+            top: -300px;
+            width: 200px;
+            margin-left: calc(50% - 100px);
+            border-radius: 5px;
+            background: rgb(100,100,100);
+            color: white;
+            text-align: center;
+            z-index: 1000000;
+            font-family: 'Roboto';
+            box-shadow: -3px 3px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 1s;
+        }
+        #popup-win{
+            position: fixed;
+            top: -300px;
+            width: 200px;
+            margin-left: calc(50% - 100px);
+            border-radius: 5px;
+            background: rgb(100,100,100);
+            color: white;
+            text-align: center;
+            z-index: 1000000;
+            font-family: 'Roboto';
+            box-shadow: -3px 3px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 1s;
+        }
+        #popup-lose{
+            position: fixed;
+            top: -300px;
+            width: 200px;
+            margin-left: calc(50% - 100px);
+            border-radius: 5px;
+            background: rgb(100,100,100);
             color: white;
             text-align: center;
             z-index: 1000000;
@@ -142,6 +188,21 @@
         <p>You achieved a success</p>
     </div>
 
+    <div id="popup-disconnected">
+        <p id="title-success"><strong>YOU WIN !</strong></p>
+        <p>Your adversary has been disconnected</p>
+    </div>
+
+    <div id="popup-win">
+        <p id="title-success"><strong>YOU WIN !</strong></p>
+        <p>You have vanished your opponent</p>
+    </div>
+
+    <div id="popup-lose">
+        <p id="title-success"><strong>YOU LOSE !</strong></p>
+        <p>You have been turned into pieces</p>
+    </div>
+
     <div id="profile-google"></div>
 
     <div id="content"></div>
@@ -158,7 +219,9 @@
             // Get the basic profile of the user
             var profile = googleUser.getBasicProfile();
             // Show the profile picture of the user in the box top right
-            document.getElementById("profile-google").style.backgroundImage = "url('" + profile.getImageUrl() + "')";
+            var picProfil = document.getElementById("profile-google");
+            picProfil.style.backgroundImage = "url('" + profile.getImageUrl() + "')";
+            picProfil.style.display = "block";
 
             // load the API games
             gapi.client.load('games', 'v1', function (response) {
@@ -198,7 +261,40 @@
             popup.style.top = "15px";
             popup.style.opacity = 1;
 
-            setTimeout(()=> {
+            setTimeout(() => {
+                popup.style.top = "-300px";
+                popup.style.opacity = 0;
+            }, 4500)
+        }
+
+        function popupDisconnect() {
+            var popup = document.getElementById("popup-disconnected");
+            popup.style.top = "15px";
+            popup.style.opacity = 1;
+
+            setTimeout(() => {
+                popup.style.top = "-300px";
+                popup.style.opacity = 0;
+            }, 4500)
+        }
+
+        function popupWin() {
+            var popup = document.getElementById("popup-win");
+            popup.style.top = "15px";
+            popup.style.opacity = 1;
+
+            setTimeout(() => {
+                popup.style.top = "-300px";
+                popup.style.opacity = 0;
+            }, 4500)
+        }
+
+        function popupLose() {
+            var popup = document.getElementById("popup-lose");
+            popup.style.top = "15px";
+            popup.style.opacity = 1;
+
+            setTimeout(() => {
                 popup.style.top = "-300px";
                 popup.style.opacity = 0;
             }, 4500)

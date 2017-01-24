@@ -36,6 +36,8 @@ export default class extends Tiled {
       this.prefabs.menu.add_item(menu_item);
     }, this);
 
+    console.log(window.isLocalPlayer);
+
     world_grid = this.create_world_grid();
 
     this.pathfinding = this.game.plugins.add(Pathfinding, world_grid, [-1], this.tile_dimensions); // Previously Tactics.Pathfinding
@@ -78,11 +80,9 @@ export default class extends Tiled {
     this.queue_player_units(battle_data, "player2");
 
     this.fifo_queue_units = new Fifo();
-    console.log(this.units_queue);
     for (let unit in this.units_queue._elements) {
       this.fifo_queue_units.push(this.units_queue._elements[unit]);
     }
-    console.log(this.fifo_queue_units);
     this.battle_ref.child("command").on("value", this.receive_command.bind(this));
 
     this.next_turn();
@@ -130,7 +130,6 @@ export default class extends Tiled {
       // Clear all the highlight_regions
       this.clear_previous_turn();
       this.current_unit = this.fifo_queue_units.shift();
-      console.log(this.fifo_queue_units.length);
 
       if (this.current_unit.prefab.alive) {
         this.current_unit.prefab.tint = (this.current_unit.prefab.name.search("player1") !== -1) ? 0x0000ff : 0xff0000;
@@ -155,18 +154,21 @@ export default class extends Tiled {
     }
     let winner, winner_message;
     winner = (this.groups.player1_units.countLiving() === 0) ? "player2" : "player1";
-    winner_message = this.game.add.text(this.game.world.centerX, this.game.world.centerY, winner + " wins", { font: "24px Arial", fill: "#FFF" });
-    winner_message.anchor.setTo(0.5);
-    this.game.input.onDown.add(function () {
-      this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
-    }, this);
+    console.log(winner);
+    console.log(window.isLocalPlayer);
+    if (winner == window.isLocalPlayer)
+      popupWin();
+    else
+      popupLose();
+
+    this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
 
   }
 
   disconnect(snapshot) {
-    console.log(snapshot.val());
     if (!snapshot.val()) {
       this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
+      popupDisconnect();
     }
   }
 
