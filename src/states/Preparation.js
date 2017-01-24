@@ -9,7 +9,6 @@ export default class extends Tiled {
     init(level_data, extra_parameters) {
         super.init(level_data);
         this.battle_ref = bdd.database().ref().child("battles").child(extra_parameters.battle_id);
-        console.log(this.battle_ref);
 
         this.local_player = extra_parameters.local_player;
         this.remote_player = extra_parameters.remote_player;
@@ -29,6 +28,35 @@ export default class extends Tiled {
         this.battle_ref.on("value", this.disconnect.bind(this));
 
         this.battle_ref.onDisconnect().remove();
+
+        // Unlock the achivement : First battle !
+        gapi.load('auth2,signin2', function () {
+            let auth2 = gapi.auth2.init();
+            auth2.then(function () {
+                // Current values
+                let isSignedIn = auth2.isSignedIn.get();
+                let currentUser = auth2.currentUser.get();
+
+                if (!isSignedIn) {
+                    console.log('Player is not sign in');
+                } else {
+                    gapi.client.load('games', 'v1', function () {
+                    });
+
+                    gapi.client.request({
+                        path: '/games/v1/achievements/CgkIhom5grsNEAIQAw/unlock',
+                        method: 'post',
+                        callback: function (response) {
+                            if (response.newlyUnlocked) {
+                                popupSuccess();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        // End achievement
+
 
         this.game.stage.disableVisibilityChange = true;
     }
@@ -64,7 +92,6 @@ export default class extends Tiled {
     }
 
     disconnect(snapshot) {
-        console.log(snapshot.val());
         if (!snapshot.val()) {
             this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
             popupDisconnect();

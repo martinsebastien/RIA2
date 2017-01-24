@@ -214,6 +214,21 @@
     <script src="dist/bundle.js"></script>
     <script>
 
+        function signinCallback(authResult) {
+            if (authResult['status']['signed_in']) {
+                console.log('OK');
+                document.getElementById('signinButton').style.display = 'none';
+                // Safe to use API here (gapi.client.games).
+            } else {
+                // Update the app to reflect a signed out user
+                // Possible error values:
+                //   "user_signed_out" - User is signed-out
+                //   "access_denied" - User denied access to your app
+                //   "immediate_failed" - Could not automatically log in the user
+                console.log('Sign-in state: ' + authResult['error']);
+            }
+        };
+
         // Callback function when the user is registered
         function onSignIn(googleUser) {
             // Get the basic profile of the user
@@ -234,7 +249,7 @@
                 path: '/games/v1/achievements',
                 method: 'get',
                 callback: function (response) {
-                    console.log(response);// Do something interesting with the response
+                    console.log(response);
                 }
             });
 
