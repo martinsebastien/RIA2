@@ -156,10 +156,36 @@ export default class extends Tiled {
     winner = (this.groups.player1_units.countLiving() === 0) ? "player2" : "player1";
     console.log(winner);
     console.log(window.isLocalPlayer);
-    if (winner == window.isLocalPlayer)
+    if (winner == window.isLocalPlayer) {
       popupWin();
-    else
+      if (gapi) {
+        console.log('GAPI is loaded');
+        gapi.client.setApiKey('1R_1__KaEvVMHS-5k1pio0sw');
+        gapi.load('client:auth2', function () {
+          gapi.auth2.getAuthInstance({
+            client_id: '462519420038-aj9brss5r84pcvc9tearpc2l9qhh8od3.apps.googleusercontent.com',
+            cookie_policy: 'none',
+            scope: 'https://www.googleapis.com/auth/games'
+          }).then(function () {
+            gapi.client.request({
+              path: '/games/v1/achievements/CgkIhom5grsNEAIQBA/unlock',
+              method: 'post',
+              callback: function (response) {
+                if (response.newlyUnlocked) {
+                  popupSuccess();
+                }
+                console.log(response);
+              }
+            });
+          });
+        });
+      } else {
+        console.error('GAPI is not loaded');
+      }
+
+    } else {
       popupLose();
+    }
 
     this.game.state.start("Boot", true, false, "assets/levels/title_screen.json", "Title");
 
@@ -203,6 +229,36 @@ export default class extends Tiled {
   }
 
   move_unit(target) {
+
+    // Unlock the achivement : Move a unit
+    gapi.load('auth2,signin2', function () {
+      let auth2 = gapi.auth2.init();
+      auth2.then(function () {
+        // Current values
+        let isSignedIn = auth2.isSignedIn.get();
+        let currentUser = auth2.currentUser.get();
+
+        if (!isSignedIn) {
+          console.log('Player is not sign in');
+        } else {
+          gapi.client.load('games', 'v1', function () {
+          });
+
+          gapi.client.request({
+            path: '/games/v1/achievements/CgkIhom5grsNEAIQBQ/unlock',
+            method: 'post',
+            callback: function (response) {
+              if (response.newlyUnlocked) {
+                popupSuccess();
+              }
+              console.log(response);// Do something interesting with the response
+            }
+          });
+        }
+      });
+    });
+    // End achievement
+
     this.current_unit.prefab.move_to(target);
     this.next_turn();
   }
@@ -218,6 +274,32 @@ export default class extends Tiled {
   }
 
   attack_unit(target_name, damage) {
+
+    if (gapi) {
+      console.log('GAPI is loaded');
+      gapi.client.setApiKey('1R_1__KaEvVMHS-5k1pio0sw');
+      gapi.load('client:auth2', function () {
+        gapi.auth2.getAuthInstance({
+          client_id: '462519420038-aj9brss5r84pcvc9tearpc2l9qhh8od3.apps.googleusercontent.com',
+          cookie_policy: 'none',
+          scope: 'https://www.googleapis.com/auth/games'
+        }).then(function () {
+          gapi.client.request({
+            path: '/games/v1/achievements/CgkIhom5grsNEAIQBQ/unlock',
+            method: 'post',
+            callback: function (response) {
+              if (response.newlyUnlocked) {
+                popupSuccess();
+              }
+              console.log(response);
+            }
+          });
+        });
+      });
+    } else {
+      console.error('GAPI is not loaded');
+    }
+
     this.prefabs[target_name].receive_damage(damage);
     this.next_turn();
   }
