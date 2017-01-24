@@ -62,5 +62,80 @@ Executer la commande suivante:
 
  # Documentation technique
 
- ![alt text](https://github.com/martinsebastien/RIA2/blob/master/assets/images/screen1.png "Screen depuis Google Play")
- ![alt text](https://github.com/martinsebastien/RIA2/blob/master/assets/images/screen2.png "Screen depuis Google Play")
+ ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen1.png "Screen depuis Google Play")
+ ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen2.png "Screen depuis Google Play")
+
+ ## Google Play games API
+
+ Utiliser l'API Google Play games fut plutôt laborieuse. En effet, j'ai dû créer un compte Google Play developer (qui coûte CHF 25.-), créé une application et finalement un service Google Play games lié à une application web (game.dowa-app.com). Il est nécessaire de remplir plusieurs questionnaires ainsi que de créer au moins 5 succès afin de publier une application. 
+ 
+ Chaque succès doit obligatoirement avoir une image (de 512x512px), un nombre de points (entre 5 et 200), un nom et une description. Chaque succès a un identifiant unique (code de référence) que l'on utilisera dans l'application pour identifier quel succès débloquer.
+
+Techniquement parlant, si l'on veut pouvoir déverrouiller des succès Google Play games dans son jeu, il est nécessaire d'utiliser une authentification Oauth2. Il est vivement conseiller d'utiliser le bouton Sign In de google afin d'identifier les utilisateurs. Ensuite, placer le code suivant à l'endroit désiré pour effectuer un appel sur l'API Google Play games et ainsi déverrouiller un succès:
+
+```js
+      // Charge les librairies authentification et signin
+      gapi.load('auth2,signin2', function () {
+        // Initialise l'authentification
+        let auth2 = gapi.auth2.init();
+        auth2.then(function () {
+          // Valeur courante d'authentification
+          let isSignedIn = auth2.isSignedIn.get();
+          let currentUser = auth2.currentUser.get();
+
+          if (!isSignedIn) {
+            console.log('Player is not sign in');
+          } else {
+            // Si l'utilisateur est identifié, on charge la librairie games
+            gapi.client.load('games', 'v1', function () {
+            });
+
+            // On effectue une requête avec l'objet gapi
+            gapi.client.request({
+              // Insérer l'identifiant du succès à débloquer
+              path: '/games/v1/achievements/IDENTITFIANT_DU_SUCCES/unlock',
+              // La requête doit être passée en POST
+              method: 'post',       
+              // Fonction de callback avec la réponse de la requête
+              callback: function (response) {
+              // Si le succès vient d'être déverrouillé :
+                if (response.newlyUnlocked) {
+              // Affiche une popup (code personnel)
+                  popupSuccess();
+                }
+              }
+            });
+          }
+        });
+      });
+      // End achievement
+```
+
+Pour pouvoir utiliser l'identification Google afin de pouvoir exécuter le code ci-dessus, il est nécessaire d'introduire les meta tags suivant dans le header du fichier HTML :
+
+```HTML
+<meta name="google-signin-client_id" content="ID_CLIENT.apps.googleusercontent.com" />
+<meta name="google-signin-cookiepolicy" content="single_host_origin" />
+<meta name="google-signin-callback" content="signinCallback" />
+<meta name="google-signin-scope" content="https://www.googleapis.com/auth/games  https://www.googleapis.com/auth/plus.login"/>
+```
+Il faut référencé son ID_CLIENT, définir la politique de cookie, définir la fonction de callback qui sera appelé lors de l'identification (peut être overridée par le bouton SignIn) et définir le scope d'application de l'identification (dans notre cas le service games et l'authentification google+).
+
+Enfin le code du bouton signIn de Google :
+
+```HTML
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+```
+
+Il est évidemment nécessaire de faire appel à quelques script (CDN) pour que la magie opère :
+
+```HTML
+<script src="https://apis.google.com/js/client.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+```
+
+Une fois que vous vous êtes identifié au jeu, vous pouvez le retrouver dans vos applications Google Play games (comme le montre les screens plus haut). Vous pouvez donc retracer les succès débloquer, ceux qui vous reste à débloquer et le nombre de points qu'ils vous ont fait gagné.
+
+Dans mon projet, je récupère également les informations basiques de l'utilisateur (comme son nom, son avatar etc...) et j'affiche l'avatar de l'utilisateur authentifier en haut à droite de la page.
+
+![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/profilpic.png "Screen depuis le jeu")
