@@ -11,7 +11,11 @@
 - Next generation of Javascript
 - Webpack
 - Multiple browser testing
-- WebFont Loader
+- Phaser API
+- Google games API
+- Firebase API
+- Pathfinding
+- Priority queue and FIFO
 - Responsive utilities!
 
 
