@@ -1,5 +1,5 @@
 # Phaser + ES6 + Webpack.
-#### A project created with Phaser + ES6 + Webpack.
+#### Un projet créé avec Phaser + ES6 + Webpack.
 
 ![Phaser+ES6+Webpack](https://raw.githubusercontent.com/lean/phaser-es6-webpack/master/assets/images/phaser-es6-webpack.jpg)
 
@@ -8,65 +8,58 @@
 
 ## Features
 - JavaScript Standard Style
-- Next generation of Javascript
+- Javascript dernière génération
 - Webpack
-- Multiple browser testing
+- Testé sous plusieurs browser
 - Phaser API
 - Google games API
 - Firebase API
 - Pathfinding
 - Priority queue and FIFO
-- Responsive utilities!
+- Responsive
 
 
-# Setup
-To use this repo you’ll need to install a few things before you have a working copy of the project.
+# Installation
+Pour utiliser ce repo, vous avez besoin d'installer quelques programmes avant d'avoir une version locale fonctionnelle.
 
-## 1. Clone this repo:
+## 1. Cloner le repo
 
-Navigate into your workspace directory.
-
-Run:
+Naviguer dans le dossier de destination et tapper la commande suivante :
 
 ```git clone https://github.com/martinsebastien/RIA2.git```
 
-## 2. Install node.js and npm:
+## 2. Installer node.js and npm:
 
 https://nodejs.org/en/
 
 
-## 3. Install dependencies:
+## 3. Installer les dépendences:
 
-Navigate to the cloned repo’s directory.
-
-Run:
+Naviguer dans le répertoire cloné et executer la commande suivante :
 
 ```npm install```
 
-## 4. Run the development server:
+## 4. Faire tourner le serveur de développement
 
-Run:
+Executer la commande suivante :
 
 ```npm run dev```
 
-This will run a server so you can run the game in a browser.
+Ceci va faire tourner le jeu sur un serveur local dans n'importe quel browser.
 
-Open your browser and enter localhost:3000 into the address bar.
+Ouvrez votre browser préféré et tapper : ```localhost:3000``` dans la barre d'adresse 
 
-Also this will start a watch process, so you can change the source and the process will recompile and refresh the browser
+Cette dernière commande (npm run dev) va également lancé un système de "watch" du code. C'est à dire que l'on peut modifié les sources du projet et elles seront automatiquement recompilée et mises à jour dansle browser.
 
 
-## Build for deployment:
+## Build pour le déploiement:
 
-Run:
+Executer la commande suivante:
 
 ```npm run deploy```
 
-This will optimize and minimize the compiled bundle.
+ Cette commande va optimisé et minifier le bundle compilé.
 
-## Credits
-Big thanks to this great repos:
+ # Documentation technique
 
-https://github.com/belohlavek/phaser-es6-boilerplate
-
-https://github.com/cstuncsik/phaser-es6-demo
+ ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
