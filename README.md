@@ -60,7 +60,7 @@ Executer la commande suivante:
 
  Cette commande va optimisé et minifier le bundle compilé.
 
- # Documentation technique
+# Documentation technique
 
  ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen1.png "Screen depuis Google Play")
  ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen2.png "Screen depuis Google Play")
