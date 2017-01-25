@@ -219,3 +219,7 @@ Les règles du jeu sont les suivantes:
 - Une fenêtre d'action s'affiche en haut à gauche de l'écran. Vous avez la possibilité de bouger, attaquer ou passer votre tour. Vous ne pouvez effectuer que une action par tour. Ainsi, lorsque vous vous serez déplacé ou que vous aurez attaqué votre tour sera automatiquement passé.
 
 Le vainqueur est celui qui aura éliminé toutes les troupes adverses.
+
+Vous trouverez le jeu en lgne sur un serveur de production à l'adresse suivante : 
+
+# http://game.dowa-app.com
