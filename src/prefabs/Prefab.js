@@ -14,6 +14,7 @@ export default class Prefab extends Phaser.Sprite {
         this.game_state.groups[properties.group].add(this);
         this.frame = +properties.frame;
 
+        // We set the anchor point for heroes
         for (let i = 0; i < list_hero.length; i++) {
             if (this.name == list_hero[i]) {
                 this.anchor.setTo(0.5, 0.7);
@@ -26,6 +27,7 @@ export default class Prefab extends Phaser.Sprite {
         this.game_state.prefabs[name] = this;
     }
 
+    // We setup the animations
     setupAnimations() {
         this.animations.add('walk_down', [
             "walk/down/0.png",
@@ -48,6 +50,7 @@ export default class Prefab extends Phaser.Sprite {
         ], 60, true);
     }
 
+    // Functions that play the animations
     walkDown() {
         this.animations.play("walk_down", 6, true);
     }

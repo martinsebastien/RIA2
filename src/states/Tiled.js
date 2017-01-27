@@ -25,16 +25,15 @@ export default class Tiled extends Phaser.State {
         this.level_data = level_data;
 
         this.scale.setGameSize(700, 525);
-        //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        //this.scale.pageAlignHorizontally = true;
-        //this.scale.pageAlignVertically = true;
 
         // start physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.game.physics.arcade.gravity.y = 0;
 
+        // We add a tilemap type image to the game
         this.map = this.game.add.tilemap(level_data.map.key);
         tileset_index = 0;
+        // For each tiles find in the tilemap, we display it
         this.map.tilesets.forEach(function (tileset, index) {
             this.map.addTilesetImage(tileset.name, level_data.map.tilesets[0]);
             tileset_index += 1;
@@ -45,12 +44,14 @@ export default class Tiled extends Phaser.State {
         let group_name, object_layer, collision_tiles, world_grid, tile_dimensions, prefab_name;
 
         this.layers = {};
+        // We set the collison layer
         this.map.layers.forEach(function (layer) {
             this.layers[layer.name] = this.map.createLayer(layer.name);
             if (layer.properties.collision) {
                 this.map.setCollisionByExclusion([-1], true, layer.name);
             }
         }, this);
+        // We resize the layer to the world size
         this.layers[this.map.layer.name].resizeWorld();
 
         this.groups = {};
@@ -72,6 +73,7 @@ export default class Tiled extends Phaser.State {
     }
 
     create_object(object) {
+        // We create all object on the map and set them position
         let object_y, object_x, position;
         object_y = object.y - (this.map.tileHeight / 2);
         object_x = object.x + (this.map.tileWidth / 2);

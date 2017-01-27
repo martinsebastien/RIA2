@@ -65,7 +65,7 @@ Executer la commande suivante:
  ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen1.png "Screen depuis Google Play")
  ![alt text](https://raw.githubusercontent.com/martinsebastien/RIA2/master/assets/images/screen2.png "Screen depuis Google Play")
 
- ## Google Play games API
+## Google Play games API
 
  Utiliser l'API Google Play games fut plutôt laborieuse. En effet, j'ai dû créer un compte Google Play developer (qui coûte CHF 25.-), créé une application et finalement un service Google Play games lié à une application web (game.dowa-app.com). Il est nécessaire de remplir plusieurs questionnaires ainsi que de créer au moins 5 succès afin de publier une application. 
  
@@ -220,6 +220,35 @@ Les règles du jeu sont les suivantes:
 
 Le vainqueur est celui qui aura éliminé toutes les troupes adverses.
 
-Vous trouverez le jeu en lgne sur un serveur de production à l'adresse suivante : 
+Vous trouverez le jeu en ligne sur un serveur de production à l'adresse suivante : 
 
 # http://game.dowa-app.com
+
+# AWA Documentation
+
+## Fichiers important à regarder
+
+- Unit.js : Qui créé les sprites et les anime (initialise et start les tweens)
+- Pathinding.js : Calcule la trajectoire à suivre
+- Tiled.js : Qui créé la carte
+- Battle.js : Qui ordonne les actions
+- Prefab.js : Fichier qui créé les animations
+- Title.js : Ecran titre, affichage de l'image de fond et de traitement de texte
+
+## Explications
+
+J'ai créé la carte à l'aide du logiciel Tiled, qui me permet de générer un fichier JSON comprenant toutes les informations qui me seront utile. Comme les cellules impraticables, quelle image utilisé sur quelle cellule, etc..
+
+Pour créer les animations des sprites, j'ai utilisé texture packer afin d'assembler les images en une (spritesheet) et me générer un fichier JSON qui indique quelle suite d'image utilisé pour telle animation.
+On peut retrouver tout les sprites générés et la structure de fichier pour les générer dans le dossier asstes/images.
+
+Le pathfinding est une sommité de complexité en terme d'animation. J'utilise la librairie EasyStar.js mais ceci ne suffit pas et pour l'intégrer au jeu avec les animations j'ai du créer plusieurs objet (un objet pathfinding et un objet unit). 
+J'ai commenté le code le chaque fichier pour vous aider à vous repérer et comprendre le code qui n'est pas du tout évident de premier abord.
+
+Dans ce projet j'ai également appris l'affichage d'image dans un canvas, les animations (tweens), l'affichage de texte et le traitement de texte (effet d'ombrage). En effet, la page d'accueil, hormis le bouton de connexion Google, est entièrement rendu dans un canvas et créé avec les outils que Phaser met à disposition. J'ai aussi passé beaucoup de temps à créer un jeu "responsive". En effet, il y a plusieurs manière possible de rendre un canvas en terme de résolution et d'échelle. J'ai effectué beaucoup de recherche à ce sujet afin de proposer un envirronement de jeux confortable et flexible (jouable également sur smartphone).
+
+La transition entre les différents états du jeu était également un point bien spécifique au canvas et très différent que pourrait l'être un affichage HTML qui dans lequel on ne peut pas supprimer les éléments mais seulement au mieux les cacher (display: none).
+
+Vous trouverez dans la liste de fichier ci-dessus davantage d'explication sur leur fonctionnement sous forme de commentaire dans le code.
+
+J'ai également réalisé plusieurs pop-up html pour soit résumer l'état du jeu (victoire ou défaite) soit indiquer au joueur qu'il a débloquer des succès. Ces pop-up sont animées avec animate.css et ont un timer qui les fait disparaitre après 4.5 secondes. 
